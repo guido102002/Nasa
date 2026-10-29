@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorador APOD – NASA</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="encabezado">
+    <h1>🔭 Explorador APOD</h1>
+    <p>La foto astronómica del día de la NASA</p>
+  </header>
+
+  <main class="contenedor">
+
+    <!-- Buscador por fecha -->
+    <section class="buscador">
+      <label for="fecha">Elige una fecha:</label>
+      <input type="date" id="fecha" min="1995-06-16">
+      <button id="btn-buscar" type="button">Buscar</button>
+    </section>
+
+    <!-- Aquí aparecen "Cargando…", errores y avisos -->
+    <p id="mensaje" class="mensaje" role="status"></p>
+
+    <!-- La APOD (oculta hasta que llegue la primera) -->
+    <article id="apod" class="apod" hidden>
+      <h2 id="apod-titulo"></h2>
+      <p id="apod-fecha" class="fecha"></p>
+
+      <img id="apod-imagen" src="" alt="">
+
+      <a id="apod-enlace-video" class="enlace-video" href="#"
+         target="_blank" rel="noopener noreferrer" hidden>
+        Ver el video en NASA
+      </a>
+
+      <div id="apod-explicacion" class="explicacion"></div>
+
+      <button id="btn-guardar" type="button">⭐ Guardar en favoritos</button>
+    </article>
+
+    <!-- Lista de favoritos -->
+    <section class="favoritos">
+      <h2>Mis favoritos</h2>
+      <ul id="lista-favoritos"></ul>
+    </section>
+
+  </main>
+
+  <!-- ORDEN IMPORTANTE: 1) Day.js  2) idioma español  3) tu código -->
+  <script src="node_modules/dayjs/dayjs.min.js"></script>
+  <script src="node_modules/dayjs/locale/es.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
