@@ -2,8 +2,8 @@
 dayjs.locale("es");
 const fechaFormato = dayjs(apod.date).format("D [de] MMMM [de] YYYY");
 
-//const URL_NASA_HOY = "https://science.nasa.gov/wp-json/wp/v2/apod-basic?per_page=1";
-const URL_NASA_HOY = "https://science.nasa.gov/wp-json/wp/v2/apod-basic/261028"
+const URL_NASA_HOY = "https://science.nasa.gov/wp-json/wp/v2/apod-basic?per_page=1";
+//const URL_NASA_HOY = "https://science.nasa.gov/wp-json/wp/v2/apod-basic/261028"
 // Elementos Que de van a cargar deacuerdo al ID
 const mensaje = document.getElementById("mensaje");
 const seccionApod = document.getElementById("apod");
@@ -44,7 +44,6 @@ function mostrarApod(apod) {
 async function cargarFotoDelDia() {
     mostrarMensaje("Cargando...", "info");
     seccionApod.hidden = true;
-
     try {
         const respuesta = await fetch(URL_NASA_HOY);
 
@@ -54,15 +53,15 @@ async function cargarFotoDelDia() {
 
         const datos = await respuesta.json();
         let apod;
-        //Direrencia la url de hoy y una en especifico
-        // if (Array.isArray(datos)) {
-        //     apod = datos[0];
-        // } else {
-        //     apod = datos;
-        // };
-
+        //Direrencia la url de hoy y una en especifico la del dia viene en un Array
+        if (Array.isArray(datos)) {
+            apod = datos[0];
+        } else {
+            apod = datos;
+        };
+        //Mensaje si no carga la imagen
         if (!apod) {
-            throw new Error("La NASA no devolvió una foto del día");
+            throw new Error("No se pudo cargar la imagen");
         };
 
         mostrarApod(apod);
@@ -72,5 +71,5 @@ async function cargarFotoDelDia() {
     };
 }
 
-// La primera foto se carga automáticamente al abrir la página.
+// Carga foto
 cargarFotoDelDia();
